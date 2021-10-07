@@ -1,0 +1,36 @@
+#!/usr/bin/python3
+
+from typing import Mapping
+
+import sys
+import math
+def file_to_array (filename) :
+    names = []
+    with open(filename) as file :
+        for line in file :
+            names.append(line.split(sep=',')[0])
+    return names
+
+def selection_sort(arr : list):
+    for i in range(0, len(arr) - 1) :
+        percent_complete = math.ceil(100 * i / len(arr))
+        sys.stdout.write('\r' + str(percent_complete) + " % ")
+        sys.stdout.flush()
+        for k in range(i, len(arr) - 1) :
+            if arr[k] < arr[i] :
+                hold = arr[i]
+                arr[i] = arr[k]
+                arr[k] = arr[i]
+    return arr
+
+
+
+def main():
+
+    arr = file_to_array(sys.argv[1])
+    sorted = selection_sort(arr)
+    with open('output.txt', 'w') as out :
+        out.writelines(sorted)
+
+if __name__ == "__main__":
+    main()

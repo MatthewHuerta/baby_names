@@ -1,0 +1,28 @@
+#!/usr/bin/python3
+
+from typing import Mapping
+import sys
+import fileinput
+import colorama
+
+colorama.init(autoreset=True)
+
+if len(sys.argv[1]) != None :
+    arr = []
+    for line in fileinput.input():
+        arr.append(line.rstrip())
+    for i in range(0, len(arr) -  1) :
+        if arr[i+1] < arr[i]:
+            print(colorama.Fore.RED + 'FAIL')
+            sys.exit(1)
+else :
+    arr = []
+    with open(sys.argv[1], 'r') as file:
+        arr = file.readlines
+    for i in range(0, len(arr) -  1) :
+        if arr[i+1] < arr[i]:
+            print(colorama.Fore.RED + 'FAIL')
+            sys.exit(1)
+
+print(colorama.Fore.GREEN + 'PASS!!')
+sys.exit(0)
